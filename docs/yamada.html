@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    	$(function() {
+            $.ajax ({
+                type: 'POST',
+                url: 'https://app.liveye.site/pooh/rs',
+                data: { 'id': '18rut06t', 'location': 1 },
+                cache: false,
+                timeout: 30000,
+                dataType: "json",
+                success: function(data) {
+                    if(data.length == 0) { return; }
+                    let obj = data[0];
+                    $('#img').attr('src', 'data:image/jpeg;base64,' + obj.image);
+                    $('#num').text('人数 : ' + obj.labels[0].value);
+                    $('#date').text('日付 : ' + obj.date);
+                }
+            });
+	    });
+    </script>
+</head>
+<body>
+<h1>liveye Webページ</h1>
+<h2>撮影した写真をWebページで公開することができます。</h2>
+<img id="img" width="900">
+<p id="num" />
+<p id="date" />
+</body>
+</html>
